@@ -1,5 +1,5 @@
-const baseUrl = process.env.API_URL;
-const App_Id = process.env.APP_ID;
+const baseUrl = process.env.REACT_APP_API_URL;
+const App_Id = process.env.REACT_APP_APP_ID;
 
 
 const fetchSimple = (endpoint, data, method = 'GET') => {

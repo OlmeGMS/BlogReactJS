@@ -1,18 +1,32 @@
-import React from 'react';
-import { fetchSimple } from '../../helpers/fetch';
-
-const getBlogs = async() => {
-  const resp = await fetchSimple('/post',null,'GET');
-  const data = await resp.json();
-  console.log('res', data);
-}
-
-getBlogs();
+import React, { useEffect, useState } from 'react';
+import { useFetchBlog } from '../../hooks/useFetchBlog';
+import { Article } from '../Article/Article';
 
 export const PostScreen = () => {
+  
+  const {loading, data:articles} = useFetchBlog();
+
   return (
-    <div>
-        <h1>Post screen</h1>
-    </div>
+    <>
+      <div className="s-content">
+        <div className="masonry-wrap">
+          <div className="masonry">
+            <div className="grid-sizer"></div>
+            {
+              loading && <p>Cargando ...</p>
+            }
+            {
+              (
+                articles.map((article) => (
+                  <Article key={article.id} article={article} />
+                )) 
+              )
+              
+            }
+            
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
