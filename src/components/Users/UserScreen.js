@@ -6,7 +6,7 @@ export const UserScreen = () => {
   const {loading, data:users} = useFetchUser();
 
   return (
-    <div>
+    <div className='col-7'>
       <table className="table">
         <thead>
           <tr>
@@ -20,7 +20,7 @@ export const UserScreen = () => {
           {
             (
               users.map(user => (
-                <tr>
+                <tr key={user.id}>
                   <th scope="row">{user.id}</th>
                   <td>{user.firstName}</td>
                   <td>{user.lastName}</td>

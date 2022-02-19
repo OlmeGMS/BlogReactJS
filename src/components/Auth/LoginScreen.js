@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchSimple } from '../../helpers/fetch';
-import { useFetchUser } from '../../hooks/useFetchUser';
+import { AuthContext } from '../../reducer/authContext';
+import { types } from '../../types/inedex';
 
 export const LoginScreen = () => {
 
   const navigate = useNavigate();
+  const { dispatch } = useContext( AuthContext);
 
   const [formState, setFormState] = useState({
     firstName: '',
@@ -20,15 +22,27 @@ export const LoginScreen = () => {
   }, [formState])
 
   const handleLogin = async() => {
+
+    // console.log('formState', firstName);
     // const resp = await fetchSimple(`user/create`,formState,'POST');
     // const dataUser = await resp.json();
     // if(dataUser.data.id || dataUser.data.email === 'Email already used'){
+    //   const action = {
+    //     type: types.login
+    //   }
+    //   dispatch(action);
+
     //   navigate('/users', {
     //     replace: true
     //   });
     // } else {
     //   alert('No se pudo realizar el registro');
     // }
+
+    const action = {
+      type: types.login
+    }
+    dispatch(action);
     navigate('/users', {
       replace: true
     });
@@ -80,12 +94,11 @@ export const LoginScreen = () => {
                 />
               </div>
                 <div className="form-group pt-5">
-                  <input 
+                  <button 
                     type="submit"
                     className="btnSubmit"
-                    value="Login" 
                     onClick={handleLogin}
-                  />
+                  >Inciar</button>
                 </div>
             </form>
           </div>

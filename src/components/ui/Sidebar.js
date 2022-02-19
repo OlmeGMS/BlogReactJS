@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink, useNavigate} from 'react-router-dom';
+import { AuthContext } from '../../reducer/authContext';
+import { types } from '../../types/inedex';
 
 export const Sidebar = () => {
 
     const navigate = useNavigate();
+    const { dispatch } = useContext( AuthContext);
 
     const handleLogout = () => {
-        // TODO: por hacer
+        const action = {
+            type: types.logout,
+            logged: false
+          }
+        dispatch(action);
         console.log('logout');
         navigate('/login', {
             replace: true
